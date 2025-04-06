@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Club Sign-Up and Filter</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="AL Mendoza" />
+    <meta name="revised" content="04/06/2025" />
+    <meta name="description" content="Display club memberships" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <div class="container">
+        <h1>Club Member List</h1>
+        
+        <label for="clubFilter">Filter by Club:</label>
+        <select id="clubFilter" onchange="filterStudents()">
+            <option value="all">All Clubs</option>
+            {{#each clubArray}}
+              <option value="{{this.name}}">{{this.name}}</option>
+            {{/each}}
+        </select>
+        <p id="desc">
+            <span class="club-info" id="all">Choose a Club</span>
+            {{#each clubArray}}
+              <span class="club-info" id="{{this.name}}" style="display: none;">{{this.description}}</span>
+            {{/each}}
+        </p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Club</th>
+                </tr>
+            </thead>
+            <tbody id="studentList">
+                {{#each clubM}}
+                   <tr data-club="{{this.preferredClub}}">
+                      <td>{{this.fullName}}</td>
+                      <td>{{this.preferredClub}}</td>
+                  </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        <p>
+          <a href="/join">
+            <button> Click Here to Join A Club </button>
+          </a>
+        </p>
+    </div>
+
+    <script>
+        
+        function filterStudents() {
+          
+            // Hide all club description info divs
+          document.querySelectorAll('.club-info').forEach(div => {
+              div.style.display = 'none';
+          });
+
+          // Show selected club description
+          const selected = document.getElementById('clubFilter').value;
+          if (selected) {
+              document.getElementById(selected).style.display = 'block';
+          }
+          
+          
+          const filter = document.getElementById("clubFilter").value;
+          const rows = document.querySelectorAll("#studentList tr");
+
+          rows.forEach(row => {
+            if (filter === "all" || row.getAttribute("data-club") === filter) {
+              row.style.display = "";
+            } else {
+              row.style.display = "none";
+            }
+          });
+         
+        }
+    </script>
+</body>
+</html>

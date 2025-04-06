@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Club Sign-Up and Filter</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="AL Mendoza" />
+    <meta name="revised" content="04/06/2025" />
+    <meta name="description" content="Student Club Sign-up Form" />
+    <link rel="stylesheet" href="styles.css" />
+    
+</head>
+<body>
+    <form action="/submit-form" method="post" class="container"
+          onsubmit = "return confirm('Accept Student-Sign-Up')"      
+          onreset = "return confirm('Entered data will be lost. Continue?')" 
+    >
+        <caption> 
+          <h1>
+           Student Club Sign-up Form
+          </h1>
+        </caption>
+        <label for="studentID">Student ID:</label>
+        <input type="number" id="studentID" name="studentID" required>
+        
+        <label for="fullName">Full Name:</label>
+        <input type="text" id="fullName" name="fullName" required>
+        
+        <label for="birthday">Birthday:</label>
+        <input type="date" id="birthday" name="birthday" required>
+        
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email" required>
+        
+        <label for="mobile">Mobile Phone:</label>
+        <input type="text" id="mobile" name="mobile" required>
+        
+        <label for="gradeLevel">Grade Level:</label>
+        <select id="gradeLevel" name="gradeLevel" required>
+            <option value="grade7">Grade 7</option>
+            <option value="grade8">Grade 8</option>
+            <option value="grade9">Grade 9</option>
+            <option value="grade10">Grade 10</option>
+            <option value="grade11">Grade 11</option>
+            <option value="grade12">Grade 12</option>
+        </select>
+        
+        <label>Intern / Extern:</label>
+        <input type="radio" id="intern" name="type" value="intern" required>
+        <label for="intern" style="display: inline;">Intern</label>
+        <input type="radio" id="extern" name="type" value="extern" required>
+        <label for="extern" style="display: inline;">Extern</label>
+        
+        <label for="organization">Preferred Organization / Club:</label>
+        <select id="preferredClub" name="preferredClub" required>
+           <!-- use handlebars to create a drop-down of clubs' name -->
+        </select>
+        
+        <label for="reason">Why do you want to join?</label>
+        <textarea id="reason" name="reason" required></textarea>
+        
+        <div class="buttons">
+            <input type="submit" value="Submit">
+            <input type="reset" value="Reset">
+        </div>
+    </form>
+    <p style="max-width: 600px; margin: auto; padding: 20px;">
+        <a href="/">
+          <button type="button"> Click Here to See Member list </button>
+        </a>
+    </p>
+     
+</body>
+</html>
