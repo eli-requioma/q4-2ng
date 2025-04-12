@@ -2,6 +2,7 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+const { sign } = require('crypto');
 
 // Create Express application
 const app = express();
@@ -56,8 +57,35 @@ app.get('/', (req, res) => {
   }
 });
 
+app.get('/join', (req, res) => {
+  res.render('join', {clubArray});
+});
 
+app.post('/submit-form', (req, res) => {
+  const signUPForm = req.body;
 
+  try {
+    // Read existing users
+    console.log('Reading existing user data...');
+    const students = JSON.parse(fs.readFileSync('data/clubmembers.json'));
+    // Add new user
+    const arrayM = students['students'];
+    arrayM.push(signUPForm);
+
+    // Save back to file
+    console.log('Saving updated user data...');
+    fs.writeFileSync('data/clubmembers.json', JSON.stringify(students, null, 2));
+    console.log('User data saved successfully');
+
+    // Redirect to info page
+    console.log('Redirecting to info page...');
+    res.redirect('/join');
+  } catch (error) {
+    console.error('Error processing user submission:', error);
+    res.status(500).send('Error saving user data');
+  }
+
+});
 
 // enable web service
 const PORT = 3000;
